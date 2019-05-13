@@ -1,39 +1,55 @@
-package Task2;
+package ign;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class IGNGame {
 
-    private String title;
     private String platform;
-    private String score_phrase;
-    private double score;
-    private String genre;
-    private char editors_choice;
-    private int release_year;
-    private double greatpct;
-    private List<Double> scores;
-    
+    private double greatTotal;
+    private double bestScore;
+    private String bestGame;
+    private double worstScore;
+    private String worstGame;
+    private int racing;
+    private ArrayList<Double> scores = new ArrayList<>();;
+    private ArrayList<Double> racingScores = new ArrayList<>();
+
     public int getReviews() {
         return getScores().size();
     }
     
     public double getGreatPct() {
-        return ((double) greatpct / getReviews()) * 100;
+        return (((double) greatTotal) / getReviews()) * 100;
     }
     
-    public void setGreatPct(double greatpct) {
-        this.greatpct = greatpct;
+    public double getAvgScores() {
+        double total = 0.0;
+        for (Double s : getScores()) {
+            total = total + s;
+        }
+        return total / getReviews();
     }
-
-    public String getTitle() {
-        return title;
+    
+    public double getStdDeviation() {
+        double avg = getAvgScores();
+        double var = 0.0;
+        for (Double s : getScores()) {
+            var = var + Math.pow(s - avg, 2.0);
+        }
+        var = var / getReviews();
+        return Math.sqrt(var);
     }
-
-    public void setTitle(String title) {
-        this.title = title;
+    
+    public double getAvgRacingScores() {
+        double totalScore = 0.0;
+        
+        for (int i = 0; i < this.racingScores.size(); i++) {
+            totalScore = totalScore + this.racingScores.get(i);
+        }
+        
+        return totalScore / this.racingScores.size();
     }
-
+    
     public String getPlatform() {
         return platform;
     }
@@ -42,53 +58,68 @@ public class IGNGame {
         this.platform = platform;
     }
 
-    public String getScore_phrase() {
-        return score_phrase;
+    public double getGreatTotal() {
+        return greatTotal;
     }
 
-    public void setScore_phrase(String score_phrase) {
-        this.score_phrase = score_phrase;
+    public void setGreatTotal(double greatTotal) {
+        this.greatTotal = greatTotal;
     }
 
-    public double getScore() {
-        return score;
+    public double getBestScore() {
+        return bestScore;
     }
 
-    public void setScore(double score) {
-        this.score = score;
+    public void setBestScore(double bestScore) {
+        this.bestScore = bestScore;
     }
 
-    public String getGenre() {
-        return genre;
+    public String getBestGame() {
+        return bestGame;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setBestGame(String bestGame) {
+        this.bestGame = bestGame;
     }
 
-    public char getEditors_choice() {
-        return editors_choice;
+    public double getWorstScore() {
+        return worstScore;
     }
 
-    public void setEditors_choice(char editors_choice) {
-        this.editors_choice = editors_choice;
+    public void setWorstScore(double worstScore) {
+        this.worstScore = worstScore;
     }
 
-    public int getRelease_year() {
-        return release_year;
+    public String getWorstGame() {
+        return worstGame;
     }
 
-    public void setRelease_year(int release_year) {
-        this.release_year = release_year;
-    } 
-    
-    public List<Double> getScores() {
+    public void setWorstGame(String worstGame) {
+        this.worstGame = worstGame;
+    }
+
+    public int getRacing() {
+        return racing;
+    }
+
+    public void setRacing(int racing) {
+        this.racing = racing;
+    }
+
+    public ArrayList<Double> getScores() {
         return scores;
     }
 
-    public void setScores(List<Double> scores) {
+    public void setScores(ArrayList<Double> scores) {
         this.scores = scores;
+    }
+
+    public ArrayList<Double> getRacingScores() {
+        return racingScores;
+    }
+
+    public void setRacingScores(ArrayList<Double> racingScores) {
+        this.racingScores = racingScores;
     }
     
 }
-
